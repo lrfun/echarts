@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+</head>
+<body>
+     
+    <div id="main" style="height:400px;width:800px;margin:0 auto"></div>
+     
+    <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+    <script type="text/javascript">
+        // 路径配置
+        require.config({
+            paths: {
+                echarts: 'http://echarts.baidu.com/build/dist'
+            }
+        });
+        
+        // 使用
+        require(
+            [
+                'echarts',
+                'echarts/chart/bar' ,// 使用柱状图就加载bar模块，按需加载
+                'echarts/chart/line' // 使用折线图就加载line模块，按需加载
+            ],
+            function (ec) {
+                // 基于准备好的dom，初始化echarts图表
+                var myChart = ec.init(document.getElementById('main')); 
+                
+                option = {
+
+                    //折线与柱状图颜色
+                     color: ['#da70d6','#b8860b','#30e0e0'],
+
+                     //去除网格线边框线
+                     grid:{
+                        borderWidth:0
+                     },
+                  
+
+                    tooltip : {
+                        trigger: 'axis'
+                    },
+
+                    //工具条
+                    // toolbox: {
+                    //     show : true,
+                    //     feature : {
+                    //         mark : {show: true},
+                    //         dataView : {show: true, readOnly: false},
+                    //         magicType: {show: true, type: ['line', 'bar']},
+                    //         restore : {show: true},
+                    //         saveAsImage : {show: true}
+                    //     }
+                    // },
+                    calculable : true,
+                    legend: {
+                        data:['仓位','当日净值','初始净值']
+                    },
+                    xAxis : [
+                        {
+                            type : 'category',
+
+                            //去除网格线
+                            splitLine:{ 
+
+                                  show:false 
+
+                           },
+                            data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+                        }
+                    ],
+
+
+                   
+                    yAxis : [
+                        {
+
+                            type : 'value', 
+
+                            //去除网格线                         
+
+                           splitLine:{ 
+
+                                  show:false 
+
+                           },
+
+                            min:0, 
+
+                           max:100,
+
+                            name : '仓位',
+                            axisLabel : {
+                                formatter: '{value} %'
+                            }
+                        },
+                        {
+                            type : 'value',
+
+                            //去除网格线
+                            splitLine:{ 
+
+                                  show:false 
+
+                           },
+                           
+                            min:0, 
+
+                            max:100,
+                            name : '净值(元)',
+                            axisLabel : {
+                                formatter: '{value} 元'
+                            }
+                        }
+                    ],
+                    series : [
+
+                        {
+                            name:'仓位',
+                            type:'bar',                            
+                             smooth:true,
+                            data:[50, 60, 80, 30, 40, 90, 19, 44, 65, 75, 98, 80]
+                        },
+                        {
+                            name:'当日净值',
+                            type:'line',
+                            //平滑曲线
+                             smooth:true,
+                            yAxisIndex: 1,
+                            data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 65, 98, 43, 18.8, 6.0, 2.3]
+                        },
+                        {
+                            name:'初始净值',
+                            type:'line',
+                            //平滑曲线
+                             smooth:true,
+                            yAxisIndex: 1,
+                            data:[2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 10.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+                        }
+                    ]
+                };
+                    
+        
+                // 为echarts对象加载数据 
+                myChart.setOption(option); 
+            }
+        );
+    </script>
+</body>
