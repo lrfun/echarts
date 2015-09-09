@@ -7,14 +7,17 @@
      
     <div id="main" style="height:400px;width:800px;margin:0 auto"></div>
      
-    <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+    <script src="js/esl.js"></script>
     <script type="text/javascript">
         // 路径配置
         require.config({
-            paths: {
-                echarts: 'http://echarts.baidu.com/build/dist'
-            }
-        });
+        paths:{ 
+            echarts:'./js/echarts',
+            'echarts/chart/bar' : './js/echarts-map',
+            'echarts/chart/line': './js/echarts-map'
+            
+        }
+    });
         
         // 使用
         require(
