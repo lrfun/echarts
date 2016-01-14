@@ -88,7 +88,11 @@
                     // },
                     calculable : true,
                     legend: {
-                        data:['看涨','看跌']
+                        data:['看涨','看跌'],
+
+                        // 标题位置
+                        x: 'center',
+                        y:30,
                     },
 
                     // 滚动条
@@ -169,10 +173,12 @@
 
                             // 标记点
                             markPoint : {
+                                   // 标记框为方形
+                                  symbol: "rectangle",                                  
                                   data : [
-                                      {name: "看涨", value: 193,xAxis: 4,yAxis: 6},                                     
+                                      {name: "看涨", value: 193,xAxis: 4,yAxis: 6}                                     
                                   ],
-                                  symbolRotate: [-90, 130],
+                                  symbolRotate: [10, 10],
                                       itemStyle: {
                                           normal: {
                                               color: "#f4447a"
@@ -193,16 +199,18 @@
                             data:[0.5, 2.2, 3.3, 4.5, 6.3, 10.2, 10.3],
                             // 标记点
                             markPoint : {
-                            data : [
-                                {name: '看跌',value:454,xAxis: 6,yAxis: 8} 
-                                ],
-                                symbolRotate: [10, 130],
-                                    color: "#81d113",
-                                    itemStyle: {
-                                        normal: {
-                                            color: "#81d113"
-                                        }
-                                }
+                                 // 标记框为方形
+                                symbol: "rectangle",                                
+                                data : [
+                                    {name: '看跌',value:454,xAxis: 6,yAxis: 8} 
+                                    ],
+                                    symbolRotate: [10, 10],
+                                        color: "#81d113",
+                                        itemStyle: {
+                                            normal: {
+                                                color: "#81d113"
+                                            }
+                                    }
                             }
                         }
                     ]
