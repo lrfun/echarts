@@ -125,9 +125,16 @@
                             axisLabel:{
                                  //X轴刻度配置
                                  interval:0 //0：表示全部显示不间隔；auto:表示自动根据刻度个数和宽度自动设置间隔个数
+                            },
+                            // 改变坐标轴颜色
+                            axisLine : {                                
+                                lineStyle : {
+                                // color : '#CCC',
+                                width:0                                
+                                }
                             }
                             
-                           }
+                        }
 
                     ],
                    
@@ -155,6 +162,14 @@
                                 // color : '#28c6de',
                                 align : 'left'
                                 }
+                            },
+
+                            // 改变坐标轴颜色
+                            axisLine : {                                
+                                lineStyle : {
+                                // color : '#CCC' 
+                                width:0                                
+                                }
                             }
                         }                      
                     ],
@@ -173,7 +188,7 @@
 
                             // 标记点
                             markPoint : {
-                                   // 标记框为方形
+                                 // 标记框为方形
                                   symbol: "rectangle",                                  
                                   data : [
                                       {name: "看涨", value: 193,xAxis: 4,yAxis: 6}                                     
