@@ -1,0 +1,218 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!--Step:1 Import a module loader, such as esl.js or require.js-->
+    <!--Step:1 引入一个模块加载器，如esl.js或者require.js-->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,minimal-ui">
+    <script src="js/esl.js"></script>
+</head>
+
+<body>
+    <!--Step:2 Prepare a dom for ECharts which (must) has size (width & hight)-->
+    <!--Step:2 为ECharts准备一个具备大小（宽高）的Dom-->
+    <div id="main" style="height:200px;padding:10px;width:100%;margin:0 auto;overflow:hidden;"></div>
+    
+    
+    <script type="text/javascript">
+    // Step:3 conifg ECharts's path, link to echarts.js from current page.
+    // Step:3 为模块加载器配置echarts的路径，从当前页面链接到echarts.js，定义所需图表路径
+    require.config({
+        paths:{ 
+            echarts:'./js/echarts',
+            'echarts/chart/line' : './js/echarts-map',
+            'echarts/chart/line': './js/echarts-map'
+            
+        }
+    });
+    
+    // Step:4 require echarts and use it in the callback.
+    // Step:4 动态加载echarts然后在回调函数中开始使用，注意保持按需加载结构定义图表路径
+    require(
+            [
+                'echarts',
+                'echarts/chart/line' ,// 使用柱状图就加载bar模块，按需加载
+                'echarts/chart/line' // 使用折线图就加载line模块，按需加载
+            ],
+            function (ec) {
+                // 基于准备好的dom，初始化echarts图表
+                var myChart = ec.init(document.getElementById('main')); 
+                
+                option = {
+                                        timeline : {
+                        //时间轴时间列表
+                        // data:[
+                        //     '2002-01-01','2003-01-01','2004-01-01','2005-01-01','2006-01-01'
+                        //     ],
+                        //自定义处理，只显示年份
+                        label:{
+                            formatter : function(s) {
+                            return s.slice(0, 4);
+                          }
+                        },
+                        //时间轴的位置设定
+                        height:80,
+                        x:50,
+                        padding:[40,10,10,10],
+                        //时间轴播放控制
+                        autoPlay : true,
+                        playInterval : 2000
+                      },
+
+
+                     color: ['#F4447A','#81D113'],
+                     grid:{
+                        // 表格边框
+                        // borderWidth:0
+
+                        // 表格两边的空白距离
+                        x:20,
+                        x2:20
+                     },
+
+                  
+
+                    tooltip : {
+                        trigger: 'axis'
+                    },
+                    // toolbox: {
+                    //     show : true,
+                    //     feature : {
+                    //         mark : {show: true},
+                    //         dataView : {show: true, readOnly: false},
+                    //         magicType: {show: true, type: ['line', 'bar']},
+                    //         restore : {show: true},
+                    //         saveAsImage : {show: true}
+                    //     }
+                    // },
+                    calculable : true,
+                    legend: {
+                        data:['看涨','看跌']
+                    },
+
+                    // 滚动条
+
+                    // dataZoom:{
+
+                    //     orient:"horizontal", //水平显示
+
+                    //     show:true, //显示滚动条
+
+                    //     start:50, //起始值为20%
+
+                    //     end:100,  //结束值为60%
+                    //     realtime:true,
+                    //     zoomLock:true
+                                           
+
+                    //     },
+                    xAxis : [
+                        {
+                            type : 'category',
+
+                            // 纵向网格
+                            splitLine:{ 
+
+                                  show:false 
+
+                           },
+                            data : ['13:00','17:00','21:00','01:00','05:00','09:00','13:00'],
+                            axisLabel:{
+                                 //X轴刻度配置
+                                 interval:0 //0：表示全部显示不间隔；auto:表示自动根据刻度个数和宽度自动设置间隔个数
+                            }
+                            
+                           }
+
+                    ],
+                   
+                    yAxis : [
+                        {
+
+                            type : 'value',                             
+                          // 横向网格
+                           splitLine:{ 
+
+                                  show:true 
+
+                           },
+
+                            min:0, 
+                           max:10,
+                           splitNumber:5,
+                            scale:true,
+
+                            name : '',
+                            axisLabel : {
+                                formatter: '{value}',
+                                show : true,
+                                textStyle : {
+                                // color : '#28c6de',
+                                align : 'left'
+                                }
+                            }
+                        }                      
+                    ],
+                    series : [
+                        
+                        {
+                            name:'看涨',
+                            type:'line',
+                            //折线中不要标记点
+                            symbol: "none",
+
+                            //平滑曲线                            
+                             smooth:true,
+                             yAxisIndex: 0,
+                            data:[2.6, 5.9, 9.0, 5.4, 9.2, 10, 6.8],
+
+                            // 标记点
+                            markPoint : {
+                                  data : [
+                                      {name: "看涨", value: 193,xAxis: 4,yAxis: 6},                                     
+                                  ],
+                                  symbolRotate: [-90, 130],
+                                      itemStyle: {
+                                          normal: {
+                                              color: "#f4447a"
+                                          }
+                                  }
+                              }
+                        },
+                        {
+                            name:'看跌',
+                            type:'line',
+
+                            //折线中不要标记点
+                            symbol: "none",
+
+                            //平滑曲线                            
+                             smooth:true,
+                            yAxisIndex: 0,
+                            data:[0.5, 2.2, 3.3, 4.5, 6.3, 10.2, 10.3],
+                            // 标记点
+                            markPoint : {
+                            data : [
+                                {name: '看跌',value:454,xAxis: 6,yAxis: 8} 
+                                ],
+                                symbolRotate: [10, 130],
+                                    color: "#81d113",
+                                    itemStyle: {
+                                        normal: {
+                                            color: "#81d113"
+                                        }
+                                }
+                            }
+                        }
+                    ]
+                };
+                    
+        
+                // 为echarts对象加载数据 
+                myChart.setOption(option); 
+            }
+        );
+    </script>
+</body>
+</html>
