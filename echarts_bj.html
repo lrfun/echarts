@@ -12,7 +12,7 @@
 <body>
     <!--Step:2 Prepare a dom for ECharts which (must) has size (width & hight)-->
     <!--Step:2 为ECharts准备一个具备大小（宽高）的Dom-->
-    <div id="main" style="height:200px;padding:10px;width:100%;margin:0 auto;overflow:hidden;"></div>
+    <div id="main" style="height:500px;padding:10px;width:100%;margin:0 auto;overflow:hidden;"></div>
     
     
     <script type="text/javascript">
@@ -67,7 +67,7 @@
                         // borderWidth:0
 
                         // 表格两边的空白距离
-                        x:20,
+                        x:30,
                         x2:20
                      },
 
@@ -150,8 +150,11 @@
                            },
 
                             min:0, 
-                           max:10,
-                           splitNumber:5,
+                           max:5,
+
+                           //小数点位数
+                           precision: 1, 
+                           splitNumber:10,
                             scale:true,
 
                             name : '',
